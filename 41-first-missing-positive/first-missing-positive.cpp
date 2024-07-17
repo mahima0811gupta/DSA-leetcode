@@ -13,7 +13,7 @@ public:
             }
         }
 
-        if (!contains1) {
+        if (contains1==false) {
             return 1;
         }
 
