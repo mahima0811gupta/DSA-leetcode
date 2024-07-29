@@ -32,7 +32,7 @@ public:
     }
     if(prev!=nullptr)
     prev->next=nullptr;
-    int eachbucketnode=L/k;
+    //int eachbucketnode=L/k;
      extranode--;
 
     }
