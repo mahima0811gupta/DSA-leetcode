@@ -22,7 +22,7 @@ public:
         ListNode* prev = nullptr;
         int eachbucketnode=L/k;
         int extranode=L%k;
-        int c=L%k;
+        
     for(int i=0;i<k;i++){
       result[i]=curr;
     for(int count=1;count<=eachbucketnode+(extranode>0?1:0);count++){
