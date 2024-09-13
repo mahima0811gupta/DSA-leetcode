@@ -27,7 +27,7 @@ public:
         }
 
         temp=head;
-        int x=cnt/2;
+        int x=ceil(cnt/2);
         while(temp!=nullptr){
             x=x-1;
            
