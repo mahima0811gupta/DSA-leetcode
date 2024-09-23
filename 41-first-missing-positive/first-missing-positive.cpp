@@ -2,12 +2,18 @@ class Solution {
 public:
     int firstMissingPositive(vector<int>& nums) {
          map<int,int>mp;
-         for(auto i:nums)mp[i]++;
+         for(auto i:nums) {
+            if(i>0)
+         mp[i]++;
+         }
+        int j=1;
+        while(1){
+        if(mp.find(j)==mp.end()){
+        return j;
+        }
+        
+        j++;
 
-        for(int i=1;i<=nums.size()+1;i++){
-               if(mp[i] ==0) return i;
-            }
-
-     return nums.size()+1;   
-    }
+      
+    }}
 };
