@@ -1,30 +1,62 @@
 class Solution {
 public:
-    vector<int> ps(vector<int> &height) {
-        vector<int> p(height.size());
-        stack<int> s;
-        for (int i=0;i<height.size();i++) {
-            while (!s.empty()&&height[s.top()]>=height[i]) {
-                s.pop();}
-            if (s.empty()) {p[i] = -1;} 
-            else {p[i]=s.top();} 
-            s.push(i);}
-        return p;}
-    vector<int> ns(vector<int> &height) {
-        vector<int> n(height.size());
-        stack<int> s;
-        for (int i=height.size()-1;i>= 0;i--) {
-            while (!s.empty() && height[s.top()] >= height[i]) {
-                s.pop();}
-            if (s.empty()) {n[i] = height.size();} 
-            else {n[i] = s.top();}
-            s.push(i);}
-        return n;}
     int largestRectangleArea(vector<int>& heights) {
-        int maxi = 0;
-        vector<int>son=ps(heights);
-        vector<int>uph=ns(heights);
-        for (int i=0;i<heights.size();i++) {
-            int cur=(uph[i]-son[i]-1)*heights[i];
-            maxi=max(cur,maxi);}
-        return maxi;    }};
+        int n=heights.size();
+         vector<int>psi(n);
+        vector<int>nsi(n);
+        vector<int>ans(n);
+        stack<int>st;
+
+        //for next smallest index
+        nsi[n-1]=n;
+        st.push(n-1);
+
+        for(int i=n-2;i>=0;i--){
+            while(st.size()>0 && heights[st.top()]>=heights[i]){
+                st.pop();
+            }
+            if(st.size()==0)
+            nsi[i]=n;
+            else{
+            nsi[i]=st.top();
+            }
+            st.push(i);
+
+        }
+        // Clear the stack for previous smallest index
+        while (!st.empty()) {
+            st.pop();
+        }
+
+
+     //for prev smallest index
+
+     psi[0]=-1;
+     st.push(0);
+     for(int i=1;i<n;i++){
+        while(st.size()>0&&heights[st.top()]>=heights[i]){
+                st.pop();
+            }
+            if(st.size()==0)
+            psi[i]=-1;
+            else{
+            psi[i]=st.top();
+            }
+            st.push(i);
+
+
+     }
+     int maxi=INT_MIN;
+     for(int i=0;i<n;i++){
+
+        ans[i]=heights[i]*(nsi[i]-psi[i]-1);
+        maxi = max(maxi, ans[i]);
+     }
+     return maxi;
+
+
+
+
+
+    }
+};
