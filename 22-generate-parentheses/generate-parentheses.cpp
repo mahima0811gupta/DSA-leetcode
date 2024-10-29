@@ -1,46 +1,35 @@
 class Solution {
 public:
    vector<string>result;
-   
 
-
-bool isvalid(string &str){
-    int cnt=0;
-    for(char ch:str){
-        if(ch=='(')
-        cnt++;
-        else
-        cnt--;
-        if (cnt<0)
-        return false;
-    }
-    
-    return cnt==0;
-}
-   void solve(string &curr,int n){
+   void solve(string &curr,int n,int open,int close){
 // base case
 if(curr.length()==2*n){
-    if (isvalid(curr)){
     result.push_back(curr);
-}
+
 return;
 }
 
+if(open<n)
+{
 //do
 curr.push_back('(');
+
 //exlpore
-solve(curr,n);
+solve(curr,n,open+1,close);
 //undo
 curr.pop_back();
+}
 
-
+if(close<open){
 //do
 curr.push_back(')');
+
 //exlpore
-solve(curr,n);
+solve(curr,n,open,close+1);
 //undo
 curr.pop_back();
-
+}
 
    }
 
@@ -48,7 +37,9 @@ curr.pop_back();
 
     vector<string> generateParenthesis(int n) {
         string curr="";
-        solve(curr,n);
+        int open=0;
+        int close=0;
+        solve(curr,n,open,close);
         return result;
 
     }
