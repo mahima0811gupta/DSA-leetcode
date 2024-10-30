@@ -16,7 +16,7 @@ public:
         if(p==nullptr && q==nullptr)
         return true;
          if (p == nullptr || q == nullptr)
-         return false;
+         return p==q;
          
 
 
