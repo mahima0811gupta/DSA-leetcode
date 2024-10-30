@@ -18,13 +18,15 @@ void swap(TreeNode*root){
     TreeNode* temp=root->left;
     root->left=root->right;
     root->right=temp;
+     swap(root->left);
+      swap(root->right);
+    
 }
     TreeNode* invertTree(TreeNode* root) {
         if(root==nullptr)
         return 0;
         swap(root);
-        invertTree(root->left);
-         invertTree(root->right);
+    
         return root;
     }
 };
