@@ -15,10 +15,9 @@ public:
         //base case
         if(p==nullptr && q==nullptr)
         return true;
-         if(p!=nullptr && q==nullptr)
+         if((p!=nullptr && q==nullptr)||(p==nullptr && q!=nullptr))
          return false;
-            if(p==nullptr && q!=nullptr)
-         return false;
+         
 
 
 
