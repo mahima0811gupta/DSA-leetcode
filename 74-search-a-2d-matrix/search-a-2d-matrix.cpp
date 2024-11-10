@@ -8,12 +8,13 @@ public:
            int i=mid/n;
            int j=mid%n;
 
-           if(matrix[i][j]==target) 
+           if(matrix[i][j]==target) {
            return true;
+           }
            else if(matrix[i][j]<target)
-            first=mid+1;
+            first++;
              else
-             last=mid-1;
+             last--;
         }
         return false;
     }
