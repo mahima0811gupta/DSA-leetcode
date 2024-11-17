@@ -11,16 +11,23 @@
  */
 class Solution {
 public:
-void solve(TreeNode* root,vector<int>&ans){
-        if(root==nullptr) return;
-        
-         solve(root->left,ans);
-          ans.push_back(root->val);
-         solve(root->right,ans);
-    }
     vector<int> inorderTraversal(TreeNode* root) {
-         vector<int>ans;
-        solve(root,ans);
-        return ans;
+        stack<TreeNode*>st;
+        vector<int>ans;
+       TreeNode*temp=root;
+       while(st.size()>0 || temp!=nullptr){
+          if(temp!=nullptr){
+            st.push(temp);
+            temp=temp->left;
+          }
+          else{                // matlb temp ka left null ho gya h 
+            temp=st.top();
+            st.pop();
+            ans.push_back(temp->val);
+            temp=temp->right;
+          }
+
+       }
+       return ans;
     }
 };
