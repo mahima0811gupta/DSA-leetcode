@@ -11,29 +11,27 @@
  */
 class Solution {
 public:
+   
    int levels(TreeNode*root){
      if(root==nullptr) return 0;
      return 1+max(levels(root->left),levels(root->right));
    }
-   void nthlevel(TreeNode*root,int curr,int level, vector<int>&v){
-    if(root==nullptr) return;
-    if(curr==level) {
-        v.push_back(root->val);
-    }
-    nthlevel(root->left,curr+1,level,v);
-    nthlevel(root->right,curr+1,level,v);
-   }
-    vector<vector<int>>levelOrder(TreeNode* root) {
-        vector<vector<int>>ans;
+   
+     void lorder(TreeNode*root,int level,vector<vector<int>>&ans){
+         if(root==nullptr) return;
+         ans[level].push_back(root->val);
+         lorder(root->left,level+1,ans);
+          lorder(root->right,level+1,ans);
+
+     }
+    vector<vector<int>> levelOrder(TreeNode* root) {
         int n=levels(root);
-        for(int i=1;i<=n;i++){
+        vector<vector<int>>ans;
+        for(int i=0;i<n;i++){
             vector<int>v;
-              nthlevel(root,1,i,v);
-              ans.push_back(v);
-
+            ans.push_back(v);
         }
+        lorder(root,0,ans);
         return ans;
-
-
     }
 };
