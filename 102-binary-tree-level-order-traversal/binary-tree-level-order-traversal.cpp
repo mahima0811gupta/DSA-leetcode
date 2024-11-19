@@ -10,28 +10,31 @@
  * };
  */
 class Solution {
-public:
-   
-   int levels(TreeNode*root){
-     if(root==nullptr) return 0;
-     return 1+max(levels(root->left),levels(root->right));
-   }
-   
-     void lorder(TreeNode*root,int level,vector<vector<int>>&ans){
-         if(root==nullptr) return;
-         ans[level].push_back(root->val);
-         lorder(root->left,level+1,ans);
-          lorder(root->right,level+1,ans);
-
-     }
+public: 
     vector<vector<int>> levelOrder(TreeNode* root) {
-        int n=levels(root);
-        vector<vector<int>>ans;
-        for(int i=0;i<n;i++){
-            vector<int>v;
+          vector<vector<int>>ans;
+        if(root==nullptr) 
+        return ans;
+       queue<TreeNode*>q;
+        q.push(root);
+        while(q.size()>0){
+            int n=q.size();
+              vector<int>v;
+            for(int i=0;i<n;i++){
+      TreeNode*temp=q.front();
+    
+      v.push_back(temp->val);
+      q.pop();
+       if(temp->left!=nullptr) 
+       q.push(temp->left);
+
+          if(temp->right!=nullptr) 
+       q.push(temp->right);
+
+            }
             ans.push_back(v);
         }
-        lorder(root,0,ans);
+
         return ans;
     }
 };
