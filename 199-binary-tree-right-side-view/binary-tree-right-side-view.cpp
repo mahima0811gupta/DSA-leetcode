@@ -11,19 +11,24 @@
  */
 class Solution {
 public:
-    int levels(TreeNode*root){
-        if(root==nullptr) return 0;
-        return 1+max(levels(root->left),levels(root->right));
-    }
-    void preorder(TreeNode*root,vector<int>&ans,int level){
-        if(root==nullptr) return;
-        ans[level]=root->val;
-          preorder(root->left,ans,level+1);
-         preorder(root->right,ans,level+1);   
-   }
+// isme har level ka jo sbse last node h wahi print karna h
     vector<int> rightSideView(TreeNode* root) {
-        vector<int>ans(levels(root),0);
-        preorder(root,ans,0);
-        return ans;
+        if(root==nullptr) return{};
+        queue<TreeNode*>q;
+        vector<int>ans;
+        q.push(root);
+        while(!q.empty()){
+            int n=q.size();
+            TreeNode*temp=nullptr;
+           while(n--){
+             temp=q.front();
+            q.pop();
+            if(temp->left!=nullptr) q.push(temp->left);
+            if(temp->right!=nullptr) q.push(temp->right);
+
+           }
+            ans.push_back(temp->val);
+           }
+           return ans;
     }
 };
