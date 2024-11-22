@@ -12,25 +12,26 @@
 class Solution {
 public:
 
+     int levels(TreeNode*root){
+        if(root==nullptr) return 0;
+        return 1+max(levels(root->left),levels(root->right));
+     }
+
     
+     void helper(TreeNode*root,int &maxdia){
+        if(root==nullptr)  return;
+       int dia=levels(root->left)+levels(root->right);
+        maxdia=max(dia,maxdia);
+        helper(root->left,maxdia);
+        helper(root->right,maxdia);
+      
 
-    int helper(TreeNode*root,int &maxdia){
-        if(root==nullptr) return 0 ;
-        int left=helper(root->left,maxdia);
-        int right=helper(root->right,maxdia);
+     }
 
-        maxdia=max(left+right,maxdia);
-        return 1+max(left,right);
-
-        
-
-    }
-
-    int diameterOfBinaryTree(TreeNode* root) {
-         if(root==nullptr) return 0 ;
-        int maxdia=INT_MIN;
-
-        helper(root,maxdia);
-        return maxdia;
+       int diameterOfBinaryTree(TreeNode* root) {
+         if(root==nullptr) return 0;
+         int maxdia=INT_MIN;
+         helper(root,maxdia);
+         return maxdia;
     }
 };
