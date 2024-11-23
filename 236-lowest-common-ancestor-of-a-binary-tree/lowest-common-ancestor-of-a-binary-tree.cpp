@@ -10,16 +10,18 @@
 class Solution {
 public:
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
-        if (root == nullptr || root == p || root == q) return root;
+        if (root == nullptr) return NULL; 
+        if(root == p || root == q) return root;
 
-        // Traverse the left and right subtrees
-        TreeNode* left = lowestCommonAncestor(root->left, p, q);
-        TreeNode* right = lowestCommonAncestor(root->right, p, q);
+         // left and right me check kro ki p/q present h ya nhi
+        TreeNode* leftN = lowestCommonAncestor(root->left, p, q);
+        TreeNode* rightN = lowestCommonAncestor(root->right, p, q);
 
-        // If both left and right are non-null, root is the LCA
-        if (left != nullptr && right != nullptr) return root;
+        // If both left and right are non-null, root hi LCA hoga
+        if (leftN != nullptr && rightN != nullptr) return root;
+        // 
+        if(leftN!=nullptr && rightN==nullptr) return leftN;
 
-        // Otherwise, return non-null child (if any) or nullptr
-        return left != nullptr ? left : right;
+        return rightN;
     }
 };
