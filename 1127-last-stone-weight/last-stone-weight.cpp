@@ -9,15 +9,15 @@ public:
             pq.push(stones[i]);
         }
         while(pq.size()>1){
-            int ist=pq.top();
+            int x=pq.top();
             pq.pop();
-            int sec=pq.top();
+            int y=pq.top();
              pq.pop();
-             int sub=abs(ist-sec);
-             if(sub!=0)
-             pq.push(sub);
-        }
-        return pq.empty() ? 0 : pq.top();
-     
+           if(x!=y)
+             pq.push(x-y);
+        } 
+        if(pq.size()==1)
+        return pq.top();
+        return 0;
     }
 };
