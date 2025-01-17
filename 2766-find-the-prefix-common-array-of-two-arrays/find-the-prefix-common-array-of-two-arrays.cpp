@@ -1,25 +1,26 @@
 class Solution {
 public:
     vector<int> findThePrefixCommonArray(vector<int>& A, vector<int>& B) {
-        //This approach uses two boolean arrays to track which numbers have appeared in A and B up to
-        // the current index. For each prefix, it checks all numbers to count common elements.
-        // While still checking all numbers for each prefix, the use of auxiliary arrays 
-        //reduces the complexity to O(n2).
-        int n=A.size();
-        vector<int>ans(n);
-        vector<bool>ispresentinA(n+1,false);
-        vector<bool>ispresentinB(n+1,false);
-        for(int i=0;i<n;i++){
-            int cnt=0;
-               ispresentinA[A[i]]=true;
-               ispresentinB[B[i]]=true;
-               for(int j=0;j<=n+1;j++){
-                if( ispresentinA[j]==true && ispresentinB[j]==true){
-                    cnt++;
-                }
-               }
-               ans[i]=cnt;
-        }
-        return ans;
+        //The optimal approach leverages a hash map to track the frequency of elements from both arrays. When an
+         //element's frequency reaches 2, it indicates it is common in the prefix. This approach avoids 
+         //redundant checks and achieves a linear time complexity of O(n), making it the most efficient solution.
+      int n=A.size();
+      unordered_map<int,int>mp;
+      vector<int>ans(n);
+      int cnt=0;
+      for(int i=0;i<n;i++){
+      mp[A[i]]++;
+      if( mp[A[i]]==2){
+        cnt++;
+      }
+       mp[B[i]]++;
+      if( mp[B[i]]==2){
+        cnt++;
+      }
+      ans[i]=cnt;
+
+
+      }
+      return ans;
     }
 };
