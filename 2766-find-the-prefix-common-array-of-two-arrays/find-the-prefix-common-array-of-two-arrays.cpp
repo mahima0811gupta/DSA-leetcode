@@ -1,26 +1,25 @@
 class Solution {
 public:
     vector<int> findThePrefixCommonArray(vector<int>& A, vector<int>& B) {
-         int n=A.size();
-
-         // he brute force approach iterates over each prefix of the arrays A and B and checks if elements in A    are present in B up to the current index. This involves nested loops, leading to a time complexity of O(n3). The idea is straightforward but inefficient due to repeated comparisons.
-
-        vector<int>result(n);
-        for(int i=0;i<n;i++) {
-        int count=0;
-        for(int A_i=0;A_i<=i;A_i++){
-            for(int B_i=0;B_i<=i;B_i++){
-                if(B[B_i]==A[A_i]){
-                    count++;
-                    break;
-                    }
+        //This approach uses two boolean arrays to track which numbers have appeared in A and B up to
+        // the current index. For each prefix, it checks all numbers to count common elements.
+        // While still checking all numbers for each prefix, the use of auxiliary arrays 
+        //reduces the complexity to O(n2).
+        int n=A.size();
+        vector<int>ans(n);
+        vector<bool>ispresentinA(n+1,false);
+        vector<bool>ispresentinB(n+1,false);
+        for(int i=0;i<n;i++){
+            int cnt=0;
+               ispresentinA[A[i]]=true;
+               ispresentinB[B[i]]=true;
+               for(int j=0;j<=n+1;j++){
+                if( ispresentinA[j]==true && ispresentinB[j]==true){
+                    cnt++;
                 }
-            }
-
-        result[i] = count;
-
+               }
+               ans[i]=cnt;
         }
-
-        return result;
+        return ans;
     }
 };
