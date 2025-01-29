@@ -5,26 +5,50 @@ public:
         int k=0;
         int n=nums1.size();
         int m=nums2.size();
-        vector<int>ans(n+m);     //0(m+n)
+        int s=m+n;
+        int ans1,ans2;
+
         while(i<n && j<m){
             if(nums1[i]<nums2[j]){
-                ans[k++]=nums1[i++];
+                if(k==s/2)  
+                   ans1=nums1[i];
+                if(k==s/2-1) 
+                    ans2=nums1[i];
+                i++;
+                k++;
             }
             else
             {
-                  ans[k++]=nums2[j++];
+                   if(k==s/2) 
+               ans1=nums2[j];
+                if(k==s/2-1) 
+               ans2=nums2[j];
+                j++;
+                k++;
             }
+         
         }
         while(i<n){
-             ans[k++]=nums1[i++];
+              if(k==s/2)  
+                   ans1=nums1[i];
+                if(k==s/2-1) 
+                     ans2=nums1[i];
+                i++;
+                k++;
         }
          while(j<m){
-             ans[k++]=nums2[j++];
+            
+                   if(k==s/2) 
+             ans1=nums2[j];
+                if(k==s/2-1) 
+            ans2=nums2[j];
+                j++;
+                k++;
+            
         }
-        int s=ans.size();
-        if(s%2!=0)  //odd
-          return ans[s/2];
+       if(s%2!=0) //odd
+         return ans1;
 
-        return   (ans[s/2]+ans[s/2-1])/2.0;
-    }
+       return (ans1+ans2)/2.0;
+    }  
 };
