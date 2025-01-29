@@ -5,7 +5,7 @@ public:
         int k=0;
         int n=nums1.size();
         int m=nums2.size();
-        vector<int>ans(n+m);
+        vector<int>ans(n+m);     //0(m+n)
         while(i<n && j<m){
             if(nums1[i]<nums2[j]){
                 ans[k++]=nums1[i++];
