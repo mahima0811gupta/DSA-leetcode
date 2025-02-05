@@ -4,7 +4,7 @@ public:
         int n=nums.size();
         vector<int>pre(n);
         vector<int>suf(n);
-        vector<int>ans(n);
+        
 
         // prefix product except self
          int p=nums[0];
@@ -23,9 +23,9 @@ public:
         }
 
         for(int i=0;i<n;i++){
-            ans[i]=pre[i]*suf[i];
+            pre[i]=pre[i]*suf[i];
         }
-        return ans;
+        return pre;
 
     }
 };
