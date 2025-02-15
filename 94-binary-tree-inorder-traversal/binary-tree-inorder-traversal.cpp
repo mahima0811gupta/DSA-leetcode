@@ -1,42 +1,34 @@
-
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
 class Solution {
 public:
     vector<int> inorderTraversal(TreeNode* root) {
-      vector<int>ans;
-      TreeNode*curr=root;
-      while(curr!=nullptr){
-     if(curr->left!=nullptr){
-        // find pred
-        TreeNode*pred=curr->left;
-          while(pred->right!=nullptr && pred->right!=curr){
-            pred=pred->right;
+        stack<TreeNode*>s;
+        vector<int>ans;
+        TreeNode*temp=root;
+
+        while(s.size()>0 || temp!=nullptr){
+            if(temp!=nullptr){
+            s.push(temp);
+            temp=temp->left;
+            }
+            else{
+                temp=s.top();
+                ans.push_back(temp->val);
+                s.pop();
+                temp=temp->right;
+            }
         }
 
-        if(pred->right==nullptr) //link kro
-
-        {
-            pred->right=curr;
-            curr=curr->left;
-
-        }
-        if(pred->right==curr) // yaha unlink kroo
-        {
-         pred->right=nullptr;
-         ans.push_back(curr->val);
-          curr=curr->right;
-        }
-        
-     }
-
-     
-     else
-     {
-        ans.push_back(curr->val);
-        curr=curr->right;
-
-     }
-
-      }  
-      return ans;
+        return ans;
     }
 };
