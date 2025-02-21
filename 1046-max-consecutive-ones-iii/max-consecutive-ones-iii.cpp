@@ -7,26 +7,31 @@ public:
         int j=0;
         int n=nums.size();
         while(j<n){
-            if(nums[j]==1){
+            
+            if(nums[j]==1) j++;
+
+            else {    // zero h
+
+            if(flip<k){
+                flip++;
                 j++;
             }
-           else     //0 h
-            {  if(flip<k){
-                   j++;
-                flip++;}
-                else   // flip==
-                {
-               maxlen=max(maxlen,j-i);
-                  while(nums[i]==1)  i++;  
-                    i++;
+            else
+            {
+            maxlen=max(maxlen,j-i);
+            while(nums[i]==1) i++;
+            i++;
             j++;
-        
+
             }
+
             }
+
+
+
 
         }
-        maxlen=max(maxlen,j-i);
-
-        return maxlen;
+           maxlen=max(maxlen,j-i);
+           return maxlen;
     }
 };
