@@ -23,7 +23,7 @@ public:
 
     int s=0;
     int e=n-1;
-    while(s<e){
+    while(s<=e){
           
           sum=max(sum,(v[s++]+v[e--]));
 
