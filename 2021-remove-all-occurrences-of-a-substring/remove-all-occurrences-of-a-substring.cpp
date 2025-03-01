@@ -1,18 +1,21 @@
 class Solution {
 public:
     string removeOccurrences(string s, string part) {
-        while(true){
-         int indx=s.find(part);
+        string result="";
+        int m=part.length();
+        int n=s.length();
+        
+        for(auto ch:s){
+            result.push_back(ch);
+        
 
-         if(indx==string::npos){
-            break;
-         }
+        while(result.length()>=part.length() && result.substr(result.length()-m)==part){
 
-         s.erase(indx,part.length());
-
-
+            result.erase(result.length()-m);
+        }
         }
 
-        return s;
+      return result;
+
     }
 };
