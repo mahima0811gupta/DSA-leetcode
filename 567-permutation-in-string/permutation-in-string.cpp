@@ -1,5 +1,8 @@
 class Solution {
 public:
+
+
+//// tc=(m-n)nlog n
     bool checkInclusion(string s1, string s2) {
         sort(s1.begin(),s1.end());
        int n=s1.length();
