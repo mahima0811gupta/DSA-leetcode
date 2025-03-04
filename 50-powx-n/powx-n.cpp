@@ -2,9 +2,12 @@ class Solution {
 public:
     double myPow(double x, int n) {
 
-        if(x==1)   return 1;
-        if(x==0)      return 0;
+        // if(x==1)   return 1;
+        // if(x==0)   return 0;
+        // if(n==0)     return 1;
 
+
+       
         long binaryform=n;
         double ans=1;
               //n is negative h to   x%^-10 ko (1/x)^-(-10)  x=1/x and binaryform ko -binaryform
