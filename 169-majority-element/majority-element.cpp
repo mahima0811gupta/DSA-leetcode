@@ -1,20 +1,24 @@
 class Solution {
 public:
-    int majorityElement(vector<int>& nums) {
-        int candidate=0;
-        int cnt=0;
-        for(int i=0;i<nums.size();i++){
-       if(cnt==0){
-        cnt=1;
-        candidate=nums[i];
+    int majorityElement(vector<int>& v) {
+        int n = v.size();
 
-       }
-       else if(candidate==nums[i])
-       cnt++;
-       else
-       cnt--;
+    //declaring a map:
+    unordered_map<int, int> mpp;
 
-        }
-        return candidate;
+    //storing the elements with its occurnce:
+    for (int i = 0; i < n; i++) {
+        mpp[v[i]]++;
     }
+
+    //searching for the majority element:
+    for (auto it : mpp) {
+        if (it.second > (n / 2)) {
+            return it.first;
+        }
+    }
+
+    return -1;
+}
+    
 };
