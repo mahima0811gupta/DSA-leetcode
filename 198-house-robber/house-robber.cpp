@@ -1,24 +1,23 @@
 class Solution {
 public:
+/// bottom up
+vector<int>dp;
 
- 
+    int fbu(vector<int>& nums){
+        int n=nums.size();
+        dp.clear();
+        dp.resize(105,-1);
+   //basecase
+        if(n==1)   return nums[0];
+          dp[n-1]=nums[n-1];
+          dp[n-2]=max(nums[n-1],nums[n-2]);
 
-    int ftd(vector<int>&nums,int i, vector<int>&dp){
-    //base case ya to ek gr ho ya 2
-    
-    if(i==nums.size()-1) return nums[i];   //single house
-    if(i==nums.size()-2)   return max(nums[i],nums[i+1]);     //2house
-     
-     if(dp[i]!=-1)   return dp[i];
-
-
-    return dp[i]=max(nums[i]+ftd(nums,i+2,dp),0+ftd(nums,i+1,dp));
+          for(int i=n-3;i>=0;i--){
+            dp[i]=max(dp[i+1],dp[i+2]+nums[i]);
+          }
+    return dp[0];
     }
-
-   int rob(vector<int>& nums) {
-    int n=nums.size();
-    vector<int>dp;
-    dp.resize(105,-1);
-         return ftd(nums,0,dp);
+    int rob(vector<int>& nums) {
+       return fbu(nums); 
     }
 };
