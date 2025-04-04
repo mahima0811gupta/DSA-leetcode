@@ -18,9 +18,8 @@ public:
     ListNode*starteven=head->next;
     while(even!=nullptr &&even->next!=nullptr){
         odd->next=odd->next->next;
+          odd=odd->next;
         even->next=even->next->next;
-
-        odd=odd->next;
         even=even->next;
 
 
