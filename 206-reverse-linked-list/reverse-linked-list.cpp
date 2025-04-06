@@ -11,18 +11,15 @@
 class Solution {
 public:
     ListNode* reverseList(ListNode* head) {
-        //using three pointer
-        ListNode*curr=head;
-         ListNode*prev=nullptr;
-           ListNode*front=nullptr;
+        //using recursion
+        // breaking big smaller into smaller then more smaller
 
-           while(curr!=nullptr){
-              front=curr->next;
-              curr->next=prev;
-              prev=curr;
-              curr=front;
-           }
+        if(head==nullptr || head->next==nullptr) return head;
+         ListNode* newNode=reverseList(head->next);
+           ListNode*front=head->next;
+            front->next=head;
+            head->next=nullptr;
+                return newNode;        
 
-           return prev;
     }
 };
