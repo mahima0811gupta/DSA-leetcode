@@ -1,36 +1,41 @@
 class Solution {
 public:
 
-    bool validpalindrome(char ch){
-        return (ch>='a'&& ch<='z')||(ch>='A'&& ch<='Z')||(ch>='0'&& ch<='9');
-    }
+   bool validpalindrome(char ch){
+    return (ch>='a' && ch<='z')||(ch>='A' && ch<='Z')||(ch>='0' && ch<='9');
+   }
 
-    char to_lowercase(char ch){
-        if(ch>='a'&& ch<='z')
-        return ch;
-       else{
-        char temp=ch+('a'-'A');
+   char to_lowercase(char ch){
+    if(ch>='a' && ch<='z')  return ch;
+    else
+      {
+        char temp=ch-'A'+'a';
         return temp;
-        }
-    }
-
+      }
+   }
     bool isPalindrome(string s) {
-        string ans;
-         for(int i=0;i<s.length();i++){
-             if(validpalindrome(s[i]))
-                     ans.push_back(to_lowercase(s[i]));
-                  }
-    int st=0;
-    int e=ans.length()-1;
-      while(st<=e){
-        if(ans[st]!=ans[e])
-        return 0;
-        else
-        {
-            st++;
-            e--;
+        vector<char> chars;
+        for(auto it:s){
+            if(validpalindrome(it)){
+            chars.push_back(to_lowercase(it));
+            }
         }
-    }
-    return 1;
+
+        int st=0;
+        int e=chars.size()-1;
+
+        while(st<=e){
+            if(chars[st]!=chars[e])
+            return false;
+
+            else
+            {
+                st++;
+                e--;
+            }
+        }
+
+
+        return true;
     }
 };
