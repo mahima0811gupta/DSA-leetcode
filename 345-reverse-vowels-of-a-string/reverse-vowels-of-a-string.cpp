@@ -13,8 +13,6 @@ public:
        while(left<right &&!vowel(s[left]))      left++;
        while(left<right &&!vowel(s[right]))      right--;
        
-       //if(left<right)
-       
       swap(s[left++],s[right--]);
 
 
