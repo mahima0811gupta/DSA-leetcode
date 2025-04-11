@@ -16,9 +16,9 @@ public:
                 depth--;
             }
 
-            if (validnumber(ch)) {
-                maxi = max(maxi, ch - '0'); 
-            }
+            // if (validnumber(ch)) {
+            //     maxi = max(maxi, ch - '0'); 
+            // }
         }
         return maxDepth;  
     }
