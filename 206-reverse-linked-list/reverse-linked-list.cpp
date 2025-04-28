@@ -11,15 +11,20 @@
 class Solution {
 public:
     ListNode* reverseList(ListNode* head) {
-        //using recursion
-        // breaking big smaller into smaller then more smaller
+        ListNode*temp=head;
+        stack<int>st;
+        while(temp!=nullptr){
+                    st.push(temp->val);
+                    temp=temp->next;
+        }
+       
+       temp=head;
+       while(!st.empty() && temp!=nullptr){
+         temp->val=st.top();
+         st.pop();
+         temp=temp->next;
+       }
 
-        if(head==nullptr || head->next==nullptr) return head;
-         ListNode* newNode=reverseList(head->next);
-           ListNode*front=head->next;
-            front->next=head;
-            head->next=nullptr;
-                return newNode;        
-
+       return head;
     }
 };
