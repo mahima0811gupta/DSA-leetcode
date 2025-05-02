@@ -1,6 +1,6 @@
 class Solution {
 public:
-
+    /// time c=n3
     bool checkpalindrome(int i,int j,string &s){
       //base case
       if(i>j)   return true; /// sbcheck kr liya
