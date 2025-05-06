@@ -25,32 +25,22 @@ public:
                 int currow=curr.first;
                 int curcol=curr.second;
 
-                //check up
-                if(currow-1>=0  && grid[currow-1][curcol]=='1')  
-                   {
-                    q.push({currow-1,curcol});
-                    grid[currow-1][curcol]='0';
-                   }
-                    //check down
-                if(currow+1<row && grid[currow+1][curcol]=='1')  
-                   {
-                    q.push({currow+1,curcol});
-                    grid[currow+1][curcol]='0';
-                   }
-                    //check left
-                if(curcol-1>=0  && grid[currow][curcol-1]=='1')  
-                   {
-                    q.push({currow,curcol-1});
-                    grid[currow][curcol-1]='0';
-                   }
-                    //check right
-                if(curcol+1<col && grid[currow][curcol+1]=='1')  
-                   {
-                    q.push({currow,curcol+1});
-                    grid[currow][curcol+1]='0';
-                   }
-               }
+                int delrow[4] = {-1, 0, 1, 0};
+                int delcol[4] = {0, 1, 0, -1};
 
+
+                 for(int i=0;i<4;i++){
+                    int rs=currow+delrow[i];
+                    int cs=curcol+delcol[i];
+
+                    if(rs>=0 && rs<row && cs>=0 && cs<col && grid[rs][cs]=='1'){
+                        q.push({rs,cs});
+                        grid[rs][cs]='0';
+                    }
+                 }
+
+               }
+           
             }
         }
 
