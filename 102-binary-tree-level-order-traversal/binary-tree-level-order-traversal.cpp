@@ -11,38 +11,25 @@
  */
 class Solution {
 public:
-    int level(TreeNode*root){
-  //base case
-  if(root==nullptr)  return 0;
-  return 1+ max(level(root->left),level(root->right));             //n time
-
-    }
-
-    void nthlevel(TreeNode*root,int curr,int level,vector<int>&v){
-          if(root==nullptr) return;
-        if(curr==level){
-            v.push_back(root->val);
-            return;
-        }
-        nthlevel(root->left,curr+1,level,v);
-          nthlevel(root->right,curr+1,level,v);
-
-    }
-
-    void lOrder(TreeNode*root,vector<vector<int>>&ans){
-        if(root==nullptr)  return;
-        int n=level(root);
-        for(int i=1;i<=n;i++){
-            vector<int>v;
-            nthlevel(root,1,i,v);
-            ans.push_back(v);
-        }
-
-    }
     vector<vector<int>> levelOrder(TreeNode* root) {
-        vector<vector<int>>ans;
-        lOrder(root,ans);
-        return ans;
+        vector<vector<int>>ans; //null hAI
+        queue<TreeNode*>q;
+        if(root==nullptr)    return ans;
+         
+         q.push(root);
+         while(q.size()>0){
+           int n=q.size();
+            vector<int>v;
+            for(int i=0;i<n;i++){
+              TreeNode*temp=q.front();
+              q.pop();
+              v.push_back(temp->val);
+              if(temp->left!=nullptr)   q.push(temp->left);
 
+              if(temp->right!=nullptr)   q.push(temp->right);
+            }
+            ans.push_back(v);
+         }
+         return ans;
     }
 };
