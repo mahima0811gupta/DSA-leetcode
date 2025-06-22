@@ -20,19 +20,30 @@ public:
          bool lefttoright=true;
          while(q.size()>0){
            int n=q.size();
-            vector<int>v(n);
+            vector<int>v;
             for(int i=0;i<n;i++){
               TreeNode*temp=q.front();
               q.pop();
-               int indx=lefttoright?i:n-1-i;
-              v[indx]=temp->val;
+              v.push_back(temp->val);
               if(temp->left!=nullptr)   q.push(temp->left);
 
               if(temp->right!=nullptr)   q.push(temp->right);
+
+              if(lefttoright){
+
+              }
+            }
+
+            if(lefttoright){
+                ans.push_back(v);
+            }
+            else{
+                reverse(v.begin(),v.end());
+                ans.push_back(v);
             }
             //direction chnge krne h 
             lefttoright=!lefttoright;
-            ans.push_back(v);
+            
          }
          return ans;
     }
