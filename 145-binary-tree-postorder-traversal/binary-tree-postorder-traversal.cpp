@@ -11,23 +11,28 @@
  */
 class Solution {
 public:
-  //approach same approach like preoder but here fisrt root  left  then right and the the end reverse the ans
+ //using two stack
     vector<int> postorderTraversal(TreeNode* root) {
         vector<int>ans;
         if(root==nullptr)  return ans;
         stack<TreeNode*>st;
+          stack<TreeNode*>helper;
         st.push(root);
         while(st.size()>0){
             TreeNode*temp=st.top();
             st.pop();
-            ans.push_back(temp->val);
+            helper.push(temp);
             if(temp->left!=nullptr)
             st.push(temp->left);
              if(temp->right!=nullptr)
             st.push(temp->right);
 
         }
-        reverse(ans.begin(),ans.end());
+        while(!helper.empty()){
+            TreeNode*temp=helper.top();
+            ans.push_back(temp->val);
+            helper.pop();
+        }
         return ans;
     }
 };
