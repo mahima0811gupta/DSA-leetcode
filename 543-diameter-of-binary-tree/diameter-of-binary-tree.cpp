@@ -11,18 +11,22 @@
  */
 class Solution {
 public:
-    int ans=0;
-    int length(TreeNode* root){
-        if(root==NULL){
-            return 0;
-        }
-        int left=1+length(root->left);
-        int right=1+length(root->right);
-        ans=max(ans,left+right-2);
-        return max(left,right);
-    }
+  
+    int height(TreeNode*root){
+        if(root==nullptr)            return 0;
+        return 1+max(height(root->left),height(root->right));
+
+    }   //time complexuty of height function is 0(n)
     int diameterOfBinaryTree(TreeNode* root) {
-        int run=length(root);
-        return ans;
+        if(root==nullptr)  return 0;
+        //// diamertre ya to left side ho skta ya right side ya to jo root se hokr .teno me jo maxi hoga wahi hoga
+
+
+//here here we find 3 function for each node..means time c is n2
+        int left=diameterOfBinaryTree(root->left);
+          int right=diameterOfBinaryTree(root->right);
+          int curr=height(root->left)+height(root->right);
+
+          return max(curr,max(left,right));
     }
 };
