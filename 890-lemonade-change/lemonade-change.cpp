@@ -19,12 +19,13 @@ public:
             }
             else{   //if 20
 
-            if(five && tens){
+          
+            
+                    if(tens && five ){
                 tens-=1;
                 five-=1;
             }
-
-                    else if(five>=3){
+       else if(five>=3){
                         five-=3;
                     }
 
