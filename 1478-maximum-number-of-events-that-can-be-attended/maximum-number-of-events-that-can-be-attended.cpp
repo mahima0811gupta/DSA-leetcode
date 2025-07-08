@@ -1,39 +1,39 @@
+
 class Solution {
 public:
     int maxEvents(vector<vector<int>>& events) {
-        int n=events.size();
-        //start the counting day from the staring index of the event
-        int day=events[0][0];
-        int result=0;
-        int i=0;
+      int n = events.size();
 
-        //make  min priorty queue to store the event on the basis of end date....nd select those
-        //that are early end 
-        priority_queue<int,vector<int>,greater<int>>pq;
-         sort(events.begin(),events.end());
-        while(!pq.empty() || i<n){
-               if(pq.empty()) {
-                day = events[i][0];
+        sort(begin(events), end(events));
+
+        priority_queue<int, vector<int>, greater<int>> pq; //min-heap
+        int day = events[0][0]; //5
+        int i   = 0;
+        int count = 0; //result number of events attended
+
+        while(!pq.empty() || i < n) {
+            
+    
+
+            while(i < n && events[i][0] == day) {
+                pq.push(events[i][1]);
+                i++;
             }
-           while(i<n && events[i][0]==day){ 
-               ///puch in the queue nd then pop that have least ending time for that day
-               pq.push(events[i][1]);
-               i++;
-           }
 
-           if(!pq.empty()){
-            pq.pop();
-            result++;
-             day++;
-           }
-         
+            if(!pq.empty()) {
+                pq.pop(); //1 event attended on this day
+                count++; //counting the result
+            }
 
-           ///here there are some vale store in queu that the waste as the currenmt day is graete then the ending day then we should not select thse events so we have to pop these 
+            day++;
 
-           while(!pq.empty() && pq.top()<day){
-            pq.pop();
-           }
+            //skip those events whose endDay < day
+            while(!pq.empty() && pq.top() < day) {
+                pq.pop();
+            }
         }
-return result;
+
+        return count;
     }
 };
+ 
