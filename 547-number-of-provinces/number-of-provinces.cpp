@@ -1,19 +1,25 @@
 class Solution {
 public:
 
-    void dfs(int node,unordered_map<int,vector<int>>&adj,vector<bool>&visited){
-        
+    void bfs(int node,unordered_map<int,vector<int>>&adj,vector<bool>&visited){
+          queue<int>q;
+          q.push(node);
            visited[node]=true;
-           for(auto &neigh:adj[node]){
-            if(!visited[neigh]){
-                dfs(neigh,adj,visited);
+           while(!q.empty()){
+            int u=q.front();
+            q.pop();
+            for(auto &neigh:adj[u]){
+                if(!visited[neigh]){
+                    q.push(neigh);
+                    visited[neigh]=true;
+                }
             }
            }
     }
     int findCircleNum(vector<vector<int>>& isConnected) {
         /// concept here make the count variable and when we run the dfs function ,then inc cnt+= as it means the connceted path is visited
          int n=isConnected.size();
-       unordered_map<int,vector<int>>adj(n);
+       unordered_map<int,vector<int>>adj;
       
         for(int i=0;i<n;i++){
             for(int j=0;j<n;j++){
@@ -29,7 +35,7 @@ public:
 
         for(int i=0;i<n;i++){
             if(!visited[i]){
-                dfs(i,adj,visited);
+                bfs(i,adj,visited);
                 cnt++;
                
             }
