@@ -1,40 +1,39 @@
 class Solution {
 public:
+bool iscycledfs(int node, unordered_map<int,vector<int>>&adj,vector<bool>&visitedcity,vector<bool>&visitedpath){
+    visitedcity[node]=true;
+    visitedpath[node]=true;
+    for(auto neigh:adj[node]){
+        if(!visitedcity[neigh] && iscycledfs(neigh,adj,visitedcity,visitedpath))
+        return true;
+        else {
+         if(visitedpath[neigh]==true)
+         //cycle h 
+         return true;
+        }
+         
+    }
+    visitedpath[node]=false;  ///backtracking that path 
+return false;
+}
     bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
         int n=numCourses;
-        vector<vector<int>>adj(n);
-        int cnt=0;
-        for(auto edge:prerequisites){
-            int u=edge[0];
-            int v=edge[1];
-            adj[v].push_back(u);
-        }
-        vector<int>indegree(numCourses,0);
-        for(int i=0;i<n;i++){
-            for(auto &v:adj[i]){
-                indegree[v]++;  }
-        }
-        queue<int>q;
-        for(int i=0;i<n;i++){
-            if(indegree[i]==0){
-            q.push(i);
-            cnt++;
-        }
+        unordered_map<int,vector<int>>adj;
+        for(auto &edge: prerequisites){
+            int a=edge[0];
+            int b=edge[1];
+            adj[b].push_back(a);
         }
 
-        while(!q.empty()){
-           int u=q.front();
-           q.pop();
-           for(auto &v:adj[u]){
-            indegree[v]--;
-            if(indegree[v]==0){
-                q.push(v);
-                cnt++;
-            }
-           }
-        }
+        vector<bool>visitedcity(n,false);
+        vector<bool>visitedpath(n,false);
 
-        if(cnt==n)   return true;
-        return false;
+        for(int i=0;i<n;i++){
+            if(!visitedcity[i] && iscycledfs(i,adj,visitedcity,visitedpath))
+            return false;  ///cycle found cant finish all coouse
+
+
+        }
+     return true;  ///cyce is not found hence finish the course
     }
 };
