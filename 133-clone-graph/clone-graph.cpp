@@ -21,37 +21,29 @@ public:
 
 class Solution {
 public:
-
-    vector<Node*>NodeRegister ; //it is contain the the clone graph'node address.
+    vector<Node*>NodeRegister;
     void dfs(Node*actual,Node*clone){
-        //// av actual node ke jitne neighbour h use travel krna h
         for(auto neighbor:actual->neighbors){
-            //if wo neighbour , noderegister me null h to use create krne dalo
-              if(NodeRegister[neighbor->val]==nullptr) {
-                   //create newnode and store its add in noderegister
-                   Node*newnode=new Node(neighbor->val);
-                   NodeRegister[newnode->val]=newnode;
-                   //now newnode ko clone ke neighbour me add kro
-                   clone->neighbors.push_back(newnode);
-                  dfs(neighbor,newnode);
-              }
-              else {
-                // man lo ki noderegister me pehle se ode address store h to direct connect clone neighbor to that node
-                 clone->neighbors.push_back(NodeRegister[neighbor->val]);
-              }
+             if(NodeRegister[neighbor->val]==nullptr){
+                Node*newnode=new Node(neighbor->val);
+                NodeRegister[newnode->val]=newnode;
+                clone->neighbors.push_back(newnode);
+                dfs(neighbor,newnode);
+             }
+             else
+             {
+               clone->neighbors.push_back(NodeRegister[neighbor->val]); 
+             }
         }
     }
-
-
     Node* cloneGraph(Node* node) {
-        //if referne node is null
-        if(node==nullptr)  return nullptr;
-        Node*clone=new Node(node->val);
-       NodeRegister.resize(110,nullptr);  // starting me sbka null rakh
-       //now add address of clone node in noderegister
-       NodeRegister[clone->val]=clone;
-       dfs(node,clone);   /// actualnode    // clone
-       return clone;
-
+        if(node==nullptr)   return nullptr;
+             Node*clone=new Node(node->val);
+             //resize is must
+             NodeRegister.resize(110,nullptr);
+             NodeRegister[clone->val]=clone;
+             dfs(node,clone);
+             return clone;
+       
     }
 };
