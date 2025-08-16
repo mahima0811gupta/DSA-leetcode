@@ -8,46 +8,36 @@
  *     ListNode(int x, ListNode *next) : val(x), next(next) {}
  * };
  */
-
 class Solution {
 public:
+
+    class mycamparator{
+        public:
+        bool operator()(ListNode*a,ListNode*b)
+        {
+               return a->val > b->val;
+        }
+    };
     ListNode* mergeKLists(vector<ListNode*>& lists) {
-        if (lists.empty()) {
-            return nullptr;
-        }
-        return mergeKListsHelper(lists, 0, lists.size() - 1);
-    }
-    
-    ListNode* mergeKListsHelper(vector<ListNode*>& lists, int start, int end) {
-        if (start == end) {
-            return lists[start];
-        }
-        if (start + 1 == end) {
-            return merge(lists[start], lists[end]);
-        }
-        int mid = start + (end - start) / 2;
-        ListNode* left = mergeKListsHelper(lists, start, mid);
-        ListNode* right = mergeKListsHelper(lists, mid + 1, end);
-        return merge(left, right);
-    }
-    
-    ListNode* merge(ListNode* l1, ListNode* l2) {
-        ListNode* dummy = new ListNode(0);
-        ListNode* curr = dummy;
-        
-        while (l1 && l2) {
-            if (l1->val < l2->val) {
-                curr->next = l1;
-                l1 = l1->next;
-            } else {
-                curr->next = l2;
-                l2 = l2->next;
-            }
-            curr = curr->next;
-        }
-        
-        curr->next = l1 ? l1 : l2;
-        
-        return dummy->next;
+        priority_queue<ListNode*,vector<ListNode*>,mycamparator>pq;
+      for(ListNode*list:lists){
+        if(list)
+        pq.push(list);         //pushing the head of the each list
+      }
+
+      ListNode*dummy=new ListNode(0);
+      ListNode*tail=dummy;
+      while(!pq.empty()){
+         ListNode*curr=pq.top();
+         pq.pop();
+         tail->next=curr;
+         tail=tail->next;
+      
+         if(curr->next){
+            pq.push(curr->next);
+         }
+      }
+
+      return dummy->next;
     }
 };
