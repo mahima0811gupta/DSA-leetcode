@@ -11,53 +11,28 @@
 class Solution {
 public:
     ListNode* removeNthFromEnd(ListNode* head, int n) {
-        if (head == nullptr)  
-            return nullptr;
-
-        // Case: Only one node and we have to delete it
-        if (head->next == nullptr && n == 1) {
-            delete head;
-            return nullptr;
+        int cnt=0;
+        ListNode*temp=head;
+        while(temp!=nullptr){
+        temp=temp->next;
+        cnt++;
         }
-
-        // Special case: delete last node
-        if (head->next != nullptr && n == 1) {
-            ListNode* temp = head;
-            while (temp->next->next != nullptr) {
-                temp = temp->next;
-            }
-            ListNode* end = temp->next;
-            temp->next = nullptr;
-            delete end;
+        if(cnt==n){
+            ListNode*temp=head;
+            head=head->next;
+            delete temp;
             return head;
         }
-
-        // Count total number of nodes
-        ListNode* temp = head;
-        int cnt = 0;
-        while (temp != nullptr) {
-            temp = temp->next;
-            cnt++;
+        int r=cnt-n-1;
+        temp=head;
+        while(r--){
+            temp=temp->next;
+            
         }
-
-        // Case: delete the head node
-        if (n == cnt) {
-            ListNode* nextNode = head->next;
-            delete head;
-            return nextNode;
-        }
-
-        // Find the (cnt - n)th node (node before the one to delete)
-        temp = head;
-        ListNode* prev = nullptr;
-        for (int i = 0; i <cnt - n; i++) {  
-            prev = temp;
-            temp = temp->next;
-        }
-
-        // Delete the nth node from end
-        prev->next = temp->next;
-        delete temp;
+         
+         ListNode*prev=temp->next;
+        temp->next=temp->next->next;
+        delete prev;
 
         return head;
     }
