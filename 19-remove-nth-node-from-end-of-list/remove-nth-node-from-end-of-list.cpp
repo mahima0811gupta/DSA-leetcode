@@ -25,9 +25,9 @@ public:
         }
         int r=cnt-n-1;
         temp=head;
-        while(r--){
+        while(r){
             temp=temp->next;
-            
+            r--;
         }
          
          ListNode*prev=temp->next;
