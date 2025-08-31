@@ -20,6 +20,7 @@ public:
        }
     }
     bool equationsPossible(vector<string>& equations) {
+       
         vector<int>parent(26);
         vector<int>rank(26,0);
         for(int i=0;i<26;i++){
@@ -27,21 +28,20 @@ public:
         }
 
         for(auto &s:equations){
-            if(s[1]=='='){
-                //dono ka union  nikalu
-                Union(s[0]-'a',s[3]-'a',parent,rank);
-            }
-        }
+            if(s[1]=='=')   //equal h to mtlb union kro 
+            Union(s[0]-'a',s[3]-'a',parent,rank);
 
-        for(auto &s:equations){
-            if(s[1]=='!'){
-                //// tb check kro dono ka parnt
-               char u=find(s[0]-'a',parent);
-                char v=find(s[3]-'a',parent);
-                if(u==v)   /// mtlb dono equal nhi h bcz != ka sign h
-                return false;
-            }  
-    }
-        return true;
+        }
+         for(auto &s:equations){
+            if(s[1]=='!')  {
+                //av check kreo dono char ek hi set me belong krte h kya
+                 char u=find(s[0]-'a',parent);
+                 char v=find(s[3]-'a',parent);
+                 if(u==v)  return false;
+            }
+         }
+        
+    return true;
+        
     }
 };
