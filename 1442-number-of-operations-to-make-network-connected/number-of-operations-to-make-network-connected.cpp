@@ -1,12 +1,10 @@
 class Solution {
 public:
-
     int find(int i,vector<int>&parent){
         if(parent[i]==i)
         return i;
    return parent[i]=find(parent[i],parent);
     }
-
     void Union(int x,int y,vector<int>&parent,vector<int>&rank){
          int x_parent=find(x,parent);
           int y_parent=find(y,parent);
@@ -21,23 +19,25 @@ public:
        }
     }
     int makeConnected(int n, vector<vector<int>>& connections) {
+        if(connections.size()<n-1) 
+        return -1;
         vector<int>parent(n);
         vector<int>rank(n,0);
-        if(connections.size()<n-1)  return -1; //////not enough cable
         for(int i=0;i<n;i++){
             parent[i]=i;
         }
+         int component=n;
         
-        int component=n;
-        for(auto &neigh:connections){
-            
-            if(find(neigh[0],parent)!=find(neigh[1],parent)){
-                Union(neigh[0],neigh[1],parent,rank);
-                component--;
+        for(auto &it:connections){
+            int u=it[0];
+            int v=it[1];
+             if(find(u,parent)!=find(v,parent)) {
+            Union(u,v,parent,rank);
+            component--;
             }
-
         }
-        
-return component-1;
+          
+          return component-1;
+
     }
 };
