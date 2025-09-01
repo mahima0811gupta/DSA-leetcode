@@ -1,24 +1,42 @@
 class Solution {
 public:
 
-    void dfs(int node,vector<bool>&visited,vector<vector<int>>& isConnected,int v){
+    void dfs(int node, vector<vector<int>>&adj,vector<int>&visited){
         visited[node]=true;
-       for(int j=0;j<v;j++){
-         if(isConnected[node][j]==1 && !visited[j])
-         dfs(j,visited,isConnected,v);
-       }
-    }
-    int findCircleNum(vector<vector<int>>& isConnected) {
-        int v=isConnected.size();
-        vector<bool>visited(v,false);
-        int province=0;
-        for(int i=0;i<v;i++){
-            if(!visited[i]){
-                province++;
-                dfs(i,visited,isConnected,v);
+        for(auto &it:adj[node]){
+            if(!visited[it]){
+                visited[it]=true;
+                dfs(it,adj,visited);
             }
         }
+    }
+    int findCircleNum(vector<vector<int>>& isConnected) {
+        int V=isConnected.size();
+          int cnt=0;
+   
+        vector<vector<int>>adj(V);
+        for(int i=0;i<V;i++){
+            for(int j=0;j<V;j++){
+                if(isConnected[i][j]==1){
+                   adj[i].push_back(j);
+                    adj[j].push_back(i);
+                 
+                }
+            }
+        }
+       vector<int>visited(V,false);
+     for(int i=0;i<V;i++){
+      for(auto &it:adj[i]){
+                  if(!visited[it]){
+                    cnt++;
+                     dfs(i,adj,visited);
+                  }
+      }
+     }
+    
 
-        return province;
+        
+
+        return cnt;
     }
 };
