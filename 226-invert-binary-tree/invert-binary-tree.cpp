@@ -9,21 +9,24 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
+
+
+ /// har node ko swap kar do  
 class Solution {
-public: 
-     void invert(TreeNode* root) {
+public:
+    void swap(TreeNode*root){
         if(root==nullptr) return;
         TreeNode*temp=root->left;
         root->left=root->right;
         root->right=temp;
-         invert(root->left);
-          invert(root->right);
-       
-     }
+        swap(root->left);
+        swap(root->right);
+
+
+    }
     TreeNode* invertTree(TreeNode* root) {
-         if(root==nullptr) return 0;
-       \
-          invert(root);
+        if(root==nullptr) return 0;
+        swap(root);
         return root;
     }
 };
