@@ -16,13 +16,19 @@ public:
     if(root==nullptr) return 0;
       return 1+max(level(root->left),level(root->right));
    }
-    int maxdia=0;
+
+   void helper(TreeNode*root,int &maxdia){
+    if(root==nullptr)  return;
+  int dia=level(root->left)+level(root->right);  
+        maxdia=max(dia,maxdia);
+        helper(root->left,maxdia);
+        helper(root->right,maxdia);
+   }
+  
     int diameterOfBinaryTree(TreeNode* root) {
         if(root==nullptr) return 0;
-        int dia=level(root->left)+level(root->right);  
-        maxdia=max(dia,maxdia);
-        diameterOfBinaryTree(root->left);
-        diameterOfBinaryTree(root->right);
+        int maxdia=0;
+        helper(root,maxdia);
         return maxdia;  
     }
 };
