@@ -9,42 +9,42 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
+
+
 class Solution {
 public:
     vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
-          vector<vector<int>>ans; //null hAI
+        if(root==NULL)
+        return {};
         queue<TreeNode*>q;
-        if(root==nullptr)    return ans;
-         
-         q.push(root);
-         bool lefttoright=true;
-         while(q.size()>0){
-           int n=q.size();
-            vector<int>v;
+        q.push(root);
+        vector<vector<int>> ans;
+        bool righttoleft=true;
+        while(!q.empty()){
+            int n=q.size();
+             vector<int>v;
             for(int i=0;i<n;i++){
-              TreeNode*temp=q.front();
-              q.pop();
-              v.push_back(temp->val);
-              if(temp->left!=nullptr)   q.push(temp->left);
+                TreeNode*node=q.front();
+                q.pop();
 
-              if(temp->right!=nullptr)   q.push(temp->right);
-
-              if(lefttoright){
-
-              }
+                v.push_back(node->val);
+                if(node->right!=NULL)
+                q.push(node->right);
+                if(node->left!=NULL)
+                q.push(node->left);
+              
             }
-
-            if(lefttoright){
-                ans.push_back(v);
-            }
+            if(righttoleft==false)
+            ans.push_back(v);
             else{
                 reverse(v.begin(),v.end());
-                ans.push_back(v);
+                 ans.push_back(v);
             }
-            //direction chnge krne h 
-            lefttoright=!lefttoright;
-            
-         }
-         return ans;
+
+       righttoleft = !righttoleft;
+
+        }
+
+        return ans;
     }
 };
