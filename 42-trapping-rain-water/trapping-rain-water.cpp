@@ -1,5 +1,8 @@
 class Solution {
 public:
+// Two-Pointer Approach (O(n) Time, O(1) Space)
+// Instead of storing arrays, use two pointers (left, right) and two variables (leftMax, rightMax).
+// Move the pointer with the smaller height and calculate trapped water on the fly.
     int trap(vector<int>& height) {
         int n=height.size();
         int lmax=height[0];
