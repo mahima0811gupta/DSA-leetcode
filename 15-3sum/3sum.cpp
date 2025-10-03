@@ -1,31 +1,32 @@
 class Solution {
-public:
+public:   //tc-nlogn      //sc-o(1)
     vector<vector<int>> threeSum(vector<int>& nums) {
-    vector<vector<int>>ans;
-    int n=nums.size();
-    sort(nums.begin(),nums.end());
-    for(int i=0;i<n-2;i++) {
-     if(i>0 && nums[i]==nums[i-1])
-     continue;
-     int start=i+1,end=n-1;
-     while(start<end){
-       int sum=nums[i]+nums[start]+nums[end];
-       if(sum<0)
-       {
-        start++;
-       }
-       else if(sum>0) {
-        end--;
-       }
-       else{
-       ans.push_back({nums[i],nums[start],nums[end]});
-       start++;
-       end--;
-      while(start<end && nums[start]==nums[start-1]) start++;
-       while(start<end && nums[end]==nums[end+1]) end--;
-       }      
-     }
-    }
- return ans;
-    }
+        int n=nums.size();
+        sort(nums.begin(),nums.end());
+        set<vector<int>>s;
+         vector<vector<int>>result;
+        for(int i=0;i<n;i++){
+            
+            int start=i+1;
+            int end=n-1;
+            while(start<end){
+                int total=nums[i]+nums[start]+nums[end];
+                if(total<0)
+                    start++;
+                else if(total>0)   end--;
+                else{
+                     s.insert({nums[i],nums[start],nums[end]});
+                    
+                    start++;
+                    end--;
+                }
+                }
+            }
+
+            for(auto &it:s){
+                result.push_back(it);
+            }
+            return result;
+        }
+    
 };
