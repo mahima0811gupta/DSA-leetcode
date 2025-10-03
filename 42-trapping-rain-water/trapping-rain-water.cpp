@@ -1,5 +1,22 @@
 class Solution {
 public:
+
+
+   //tc-3n  sc-n
+//    For any bar i, the amount of water that can be trapped above it depends on:
+// The highest bar on its left (leftMax[i])
+// The highest bar on its right (rightMax[i])
+// The trapped water at index i =
+// min(leftMax[i], rightMax[i]) - height[i]
+
+
+
+
+// We use two prefix arrays:
+// leftMax[i] → stores the tallest bar height to the left of i
+// rightMax[i] → stores the tallest bar height to the right of i
+// Then, in one more loop, we apply the formula for all indices.
+
     int trap(vector<int>& height) {
         int n=height.size();
         vector<int>lmax(n,0),rmax(n,0);
