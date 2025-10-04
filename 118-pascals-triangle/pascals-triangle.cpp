@@ -1,16 +1,16 @@
 class Solution {
 public:
     vector<vector<int>> generate(int numRows) {
-        vector<vector<int>>result(numRows);
-        for(int i=0;i<numRows;i++){
-            result[i]=vector<int>(i+1,1);
-
-            for(int j=1;j<i;j++){
-                result[i][j]=result[i-1][j-1]+result[i-1][j];
+          vector<vector<int>>result(numRows);
+        for(int row=0;row<numRows;row++){
+            vector<int>vec(row+1,1);
+            for(int step=1;step<vec.size()-1;step++){
+                vec[step]=result[row-1][step-1]+result[row-1][step];
             }
+            result[row]=vec;
+
         }
-
-
         return result;
+        
     }
 };
