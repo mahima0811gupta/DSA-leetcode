@@ -11,24 +11,17 @@
  */
 class Solution {
 public:
-
-   int level(TreeNode*root){
-    if(root==nullptr) return 0;
-      return 1+max(level(root->left),level(root->right));
-   }
-
-   void helper(TreeNode*root,int &maxdia){
-    if(root==nullptr)  return;
-  int dia=level(root->left)+level(root->right);  
-        maxdia=max(dia,maxdia);
-        helper(root->left,maxdia);
-        helper(root->right,maxdia);
-   }
-  
+    int levels(TreeNode*root){
+        if(root==NULL) return 0;
+        return 1+max(levels(root->left),levels(root->right));
+    }
+      int maxi=0;
     int diameterOfBinaryTree(TreeNode* root) {
-        if(root==nullptr) return 0;
-        int maxdia=0;
-        helper(root,maxdia);
-        return maxdia;  
+        if(root==NULL) return 0;
+        int dia=levels(root->left)+levels(root->right);
+        maxi=max(maxi,dia);
+        diameterOfBinaryTree(root->left);
+         diameterOfBinaryTree(root->right);
+        return maxi;
     }
 };
