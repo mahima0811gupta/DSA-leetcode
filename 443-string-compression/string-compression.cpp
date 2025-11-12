@@ -6,30 +6,25 @@ public:
         int i=0;
         while(i<n){
             int cnt=0;
-            char ch=chars[i];
-           while(i<n && ch==chars[i]){
-            cnt++;
-            i++;
-           }
+            int ch=chars[i];
+            while(i<n && ch==chars[i]){
+                cnt++;
+                i++;
+            }
+
             if(cnt>1){
                 chars[indx++]=ch;
-                 string sub=to_string(cnt);
-                 for(auto dig:sub){
+                string sub=to_string(cnt);
+                for(auto dig:sub){
                     chars[indx++]=dig;
-                 }
-               
+                }
             }
             else{
                 chars[indx++]=ch;
-              
             }
-           
-
-
-
-
         }
-        chars.resize(indx);
+
+       // chars.resize(indx);
         return indx;
     }
 };
