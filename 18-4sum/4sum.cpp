@@ -12,7 +12,6 @@ public:
                int end=n-1;
                while(start<end){
                 long long total=(long long)nums[i]+nums[j]+nums[start]+nums[end];
-
                 if(total>target)  end--;
                 else if(total<target) start++;
 
@@ -21,7 +20,7 @@ public:
                     start++;
                     end--;
                     while(start<end && nums[start]==nums[start-1]) start++;
-                    while(start<end && nums[end]==nums[end+1]) end--;
+                   while(start<end && nums[end]==nums[end+1]) end--;
                 }
                }
             }
