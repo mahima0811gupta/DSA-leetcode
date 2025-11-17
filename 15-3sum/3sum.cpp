@@ -5,7 +5,7 @@ public:
         sort(nums.begin(),nums.end());
      
          vector<vector<int>>result;
-        for(int i=0;i<n;i++){
+        for(int i=0;i<n-2;i++){
             if(i>0 && nums[i]==nums[i-1])
             continue;
             int start=i+1;
@@ -20,8 +20,8 @@ public:
                      start++;
                      end--;
 
-                     while(start<end && nums[start]==nums[start-1]) start++;
-                     while(start<end && nums[end]==nums[end+1]) end--;
+                      while(start<end && nums[start]==nums[start-1]) start++;
+                      while(start<end && nums[end]==nums[end+1]) end--;
                 }
                 }
             }
