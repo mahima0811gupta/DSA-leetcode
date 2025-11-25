@@ -1,37 +1,28 @@
 class Solution {
 public:
-    int search(vector<int>& arr, int target) {
-        int n=arr.size();
-        int s=0;
-        int e=n-1;
-
+    int search(vector<int>& nums, int target) {
+        int s=0,e=nums.size()-1;
         while(s<=e){
+        int mid=s+(e-s)/2;
 
-            int mid=s+(e-s)/2;
-           if(arr[mid]==target)
-              return mid;
-            ////// search kro ki lefi half sorted  ya right
+        if(nums[mid]==target)  return mid;
 
-            /// if left halft sorted
-            if(arr[s]<=arr[mid]){
+        ////check left part is sorted or not
 
-                /// av dekho target exist krta h ya nhi
-                if(arr[s]<=target && target<=arr[mid]){
-                    e=mid-1;
-                }
-                else
-                   s=mid+1;
-            }
-            // mtlb right wala sorted hai..
-            else
-            {
-                if(arr[mid]<=target && target<=arr[e]){
-                    s=mid+1;
-                }
-                    else
-                    e=mid-1;
-                }
+        else if(nums[s]<=nums[mid]){   //left is sorted
+           //check target lies in this or not
+           if(nums[s]<=target && nums[mid]>target){
+             e=mid-1;
+           }
+           else   s=mid+1;
         }
-            return -1;
+        else  {   //right is sorted
+            if(nums[mid]<=target && nums[e]>=target){
+             s=mid+1;
+           }
+           else   e=mid-1;
+        }
+        }
+        return -1;
     }
 };
