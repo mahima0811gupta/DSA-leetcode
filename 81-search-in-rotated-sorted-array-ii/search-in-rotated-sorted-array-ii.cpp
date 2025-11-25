@@ -1,42 +1,33 @@
 class Solution {
 public:
     bool search(vector<int>& nums, int target) {
-        int n=nums.size();
-        int s=0;
-        int e=n-1;
+         int s=0,e=nums.size()-1;
         while(s<=e){
-            int mid=s+(e-s)/2;
-            if(nums[mid]==target)  return true;
-            ///edge cases
-            if(nums[s]==nums[mid] && nums[mid]==nums[e]){
-                s=s+1;
-                e=e-1;
-                continue;
-            }
+        int mid=s+(e-s)/2;
 
-            /// left part soredted h ya nhi
-             if(nums[s]<=nums[mid]){
-                if(nums[s]<=target && target <=nums[mid])  // exist krta h
-                e=mid-1;
-                else
-                s=mid+1;
-            }
+        if(nums[mid]==target)  return true;
 
-
-            else
-            {
-
-            if(nums[mid]<=target && target <=nums[e])   // right me exist krta h
-               s=mid+1;
-               else
-               e=mid-1;
-
-
-            }
+        if(nums[s]==nums[mid] && nums[mid]==nums[e]){
+            s++;
+            e--;
+            
         }
 
+        ////check left part is sorted or not
+        else if(nums[s]<=nums[mid]){   //left is sorted
+           //check target lies in this or not
+           if(nums[s]<=target && nums[mid]>target){
+             e=mid-1;
+           }
+           else   s=mid+1;
+        }
+        else  {   //right is sorted
+            if(nums[mid]<=target && nums[e]>=target){
+             s=mid+1;
+           }
+           else   e=mid-1;
+        }
+        }
         return false;
-
-
     }
 };
